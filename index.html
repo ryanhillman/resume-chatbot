@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan Hillman</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f7fb;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+    header p {
+      margin: 10px 0 30px;
+      font-size: 18px;
+    }
+
+    .btn {
+      background: #fff;
+      color: #0072ff;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 5px;
+      display: inline-block;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn:hover {
+      background: #0072ff;
+      color: white;
+    }
+
+    /* Shaded section for contact form */
+
+    .contact-section {
+      background: #eef3f9;
+      padding: 60px 20px;
+    }
+
+    .card {
+      background: white;
+      margin: 0 auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+      color: #0072ff;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    form textarea {
+      resize: none;
+    }
+
+    form button {
+      background: #0072ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background: #005bb5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Ryan Hillman</h1>
+    <p>Ask | Explore | Connect</p>
+
+    <a
+      class="btn"
+      href="https://storage.googleapis.com/ryan-resume-bucket/resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer">
+      Resume
+    </a>
+
+    <a
+      class="btn"
+      href="https://www.linkedin.com/in/ryan-h-7614a2128/"
+      target="_blank"
+      rel="noopener noreferrer">
+      LinkedIn
+    </a>
+
+    <a
+      class="btn"
+      href="https://github.com/ryanhillman"
+      target="_blank"
+      rel="noopener noreferrer">
+      GitHub
+    </a>
+  </header>
+
+  <!-- Contact Form Section -->
+  <section class="contact-section">
+    <div class="card">
+      <h2>Contact Ryan</h2>
+
+      <form action="https://formspree.io/f/xldpwjdz" method="POST">
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          required>
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          required>
+
+        <textarea
+          name="message"
+          rows="5"
+          placeholder="Your Message"
+          required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>Keep building. © 2025 Ryan Hillman</p>
+  </footer>
+
+  <!-- Dialogflow Messenger -->
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+  <df-messenger
+    intent="WELCOME"
+    chat-title="Ryan's Assistant"
+    agent-id="c893a66a-9095-4674-b773-8040a39b4cc7"
+    language-code="en">
+  </df-messenger>
+</body>
+</html>
