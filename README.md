@@ -17,7 +17,7 @@ This project allows visitors to explore my professional background with a chatbo
 - Google Dialogflow ES: Handles intents like skills, programming languages, and small talk.
 - Webhook (Python/Flask on Google Cloud Run): Pulls information from my resume on a JSON file in Google Cloud Storage.
 - Chatbot embedded using Dialogflow Messenger.
-- Links to my GitHub, LinkedIn, and Resume.
+- Links to my Resume, LinkedIn, and GitHub.
 - Contact Form implemented with [Formspree](https://formspree.io).
 - GitHub Pages for static site hosting.
 - Frontend designed with HTML5, CSS3, and lightweight JavaScript.
