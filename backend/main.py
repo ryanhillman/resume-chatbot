@@ -51,7 +51,7 @@ def webhook():
                 lines.append(f"- {role} at {company}")
         return jsonify({"fulfillmentText": "\n".join(lines)})
 
-    # ACCENTURE overview
+    # ACCENTURE
     if intent == "Accenture":
         return jsonify({
             "fulfillmentText":
@@ -72,7 +72,7 @@ def webhook():
         text = "Cloud Application Developer for NYCERS\n\n" + "\n".join(f"- {b}" for b in bullets)
         return jsonify({"fulfillmentText": text})
 
-    # BANK OF AMERICA / PEGASYSTEMS
+    # BANK OF AMERICA
     if intent in ["BoA Details", "Bank of America Details", "Pegasystems Support Details"]:
         accenture = next((x for x in data.get("experience", []) if x.get("company") == "Accenture"), {})
         bullets = accenture.get("details", {}).get(
@@ -104,7 +104,7 @@ def webhook():
             return jsonify({"fulfillmentText": "No CPI Security details found."})
         return jsonify({"fulfillmentText": format_experience(job)})
 
-    # SKILLS overview
+    # SKILLS
     if intent == "Skills":
         return jsonify({
             "fulfillmentText":
