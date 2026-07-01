@@ -21,3 +21,9 @@ This project allows visitors to explore my professional background with a chatbo
 - Contact Form implemented with [Formspree](https://formspree.io).
 - GitHub Pages for static site hosting.
 - Frontend designed with HTML5, CSS3, and lightweight JavaScript.
+
+---
+
+## Screenshot
+
+![Chatbot Screenshot](./docs/screenshot.png)
