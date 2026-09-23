@@ -40,10 +40,12 @@ pip install -r requirements.txt
 python main.py
 ```
 
-The Flask webhook will run locally at `http://localhost:5000`.
+The Flask webhook will run locally at `http://localhost:8080`.
 
 ### Frontend
 
-The frontend is a standalone `index.html` page hosted through GitHub Pages.
+The frontend is a standalone `index.html` page. It can be opened locally or hosted through GitHub Pages.
 
-The chatbot uses Dialogflow ES with the webhook deployed to Cloud Run.
+---
+
+Please see the linked demo for an overview of deployment.
