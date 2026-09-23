@@ -1,0 +1,71 @@
+{
+  "experience": [
+    {
+      "company": "Accenture",
+      "role": "Consultant",
+      "years": "September 2021 - October 2025",
+      "details": {
+        "Cloud Application Developer - New York City Employees Retirement System (NYCERS)": [
+          "Designed Java microservice solutions to transition legacy systems towards the cloud",
+          "Executed IaaS and PaaS migration paths to improve scalability and cost efficiency",
+          "Strengthened system security and resilience through architecture assurance and compliance enhancements",
+          "Utilized Simflofy with JavaScript tasks to convert PDF records into XFDF and RDF data files"
+        ],
+        "Pegasystems Support - Bank of America": [
+          "Implemented Generative AI to automate system recovery processes",
+          "Diagnosed complex issues as second-level support resource",
+          "Collaborated with engineers to discuss objectives and process resolution updates"
+        ]
+      }
+    },
+    {
+      "company": "Freshpire Inc",
+      "role": "Data Migration",
+      "years": "December 2020 - January 2021",
+      "details": [
+        "Architected data infrastructure using Airtable workflows to create a centralized online platform for local farms",
+        "Partnered directly with the founder to enhance visibility and efficiency across the agricultural supply chain"
+      ]
+    },
+    {
+      "company": "CliftonLarsonAllen LLP",
+      "role": "Tax Accounting Internship",
+      "years": "Dec 2016 - April 2017",
+      "details": [
+        "Prepared 1040, 1120, and state property tax returns for individual clients and small businesses",
+        "Collected and uploaded client financial documents to streamline data processing",
+        "Met with clients to clarify tax documentation, explain deductions, and resolve filing-related inquiries"
+      ]
+    },
+    {
+      "company": "CPI Security",
+      "role": "Inventory Internship",
+      "years": "May 2016 - September 2016",
+      "details": [
+        "Maintained weekly inventory records, reporting part usage and restock needs to ensure uninterrupted field operations",
+        "Tested incoming components for defects to coordinate manufacturer returns, preserving product quality",
+        "Distributed security system parts to service technicians based on daily schedules"
+      ]
+    }
+  ],
+  "skills": {
+    "Languages": ["Java", "Python", "JavaScript", "SQL", "R"],
+    "Frameworks & Libraries": ["Spring Boot", "Angular", "React", "FastAPI", "Flask", "Vue", "Pandas", "JUnit"],
+    "Platforms": ["AWS", "Microsoft Azure", "Google Cloud", "Pegasystems", "LangFlow"],
+    "DevOps": ["CI/CD", "Terraform", "Docker", "Kubernetes", "Kustomize", "Caddy"],
+    "Databases": ["PostgreSQL", "Airtable", "Redis"]
+  },
+  "education": {
+    "school": "The University of North Carolina at Charlotte",
+    "degree": "Bachelor of Science in Computer Science - Software, Systems, & Networks concentration",
+    "graduation": "August 2021"
+  },
+  "certifications": [
+    "Amazon Web Services Certified Cloud Practitioner - August 2023",
+    "Microsoft Certified: Azure Fundamentals - September 2025",
+    "Google Cloud Digital Leader - December 2025"
+  ],
+  "awards": [
+    "Presidential Service Award - completed over 100 hours of community service within 1 year"
+  ]
+}
