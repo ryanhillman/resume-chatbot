@@ -32,6 +32,10 @@ This project allows visitors to explore my professional background with a chatbo
 
 ## How to Run
 
+### Resumes
+
+Upload the PDF and JSON resume files to a Google Cloud storage bucket. 
+
 ### Backend
 
 ```bash
@@ -46,10 +50,6 @@ Deploy to Cloud Run to get a public webhook URL.
 
 1. Zip the contents of `chatbot/` and import it via **Settings → Export and Import → Restore From Zip**.
 2. Under **Fulfillment**, enable the webhook and set the URL to `https://<your-cloud-run-url>/webhook`.
-
-### Resumes
-
-Upload the PDF and JSON resume files to a Google Cloud storage bucket. 
 
 ### Frontend
 
