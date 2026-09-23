@@ -1,0 +1,67 @@
+[
+  {
+    "id": "3fb0a3c7-3300-41f2-98f0-15f1619252e6",
+    "data": [
+      {
+        "text": "Consulting?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "2f8bb433-0504-4632-b114-88c30387a8c4",
+    "data": [
+      {
+        "text": "Let\u0027s hear about Accenture experience.",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "61956e6d-b775-4951-bd37-94c28ed67044",
+    "data": [
+      {
+        "text": "Accenture?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "6f6db7a8-255a-49f5-8650-0fba6c743201",
+    "data": [
+      {
+        "text": "More about Accenture?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "9ebc692c-c910-4efd-ae3b-87d202741261",
+    "data": [
+      {
+        "text": "Can you tell me about Accenture?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

@@ -62,7 +62,7 @@ def webhook():
         })
 
     # NYCERS
-    if intent in ["NYCERS Details", "Cloud Application Developer Details", "New York City Employee Retirement System Details"]:
+    if intent == "NYCERS":
         accenture = next((x for x in data.get("experience", []) if x.get("company") == "Accenture"), {})
         bullets = accenture.get("details", {}).get(
             "Cloud Application Developer - New York City Employees Retirement System (NYCERS)", []
@@ -73,7 +73,7 @@ def webhook():
         return jsonify({"fulfillmentText": text})
 
     # BANK OF AMERICA
-    if intent in ["BoA Details", "Bank of America Details", "Pegasystems Support Details"]:
+    if intent == "Bank of America":
         accenture = next((x for x in data.get("experience", []) if x.get("company") == "Accenture"), {})
         bullets = accenture.get("details", {}).get(
             "Pegasystems Support - Bank of America", []
@@ -84,21 +84,21 @@ def webhook():
         return jsonify({"fulfillmentText": text})
 
     # FRESHPIRE
-    if intent in ["Freshpire", "Freshpire Details", "Data Migration Details"]:
+    if intent == "Freshpire":
         job = next((x for x in data.get("experience", []) if x.get("company") == "Freshpire Inc"), {})
         if not job:
             return jsonify({"fulfillmentText": "No Freshpire details found."})
         return jsonify({"fulfillmentText": format_experience(job)})
 
     # CLIFTON LARSON ALLEN
-    if intent in ["CliftonLarsonAllen", "CliftonLarsonAllen Details", "CLA Details", "Tax Accounting Internship"]:
+    if intent == "CliftonLarsonAllen":
         job = next((x for x in data.get("experience", []) if x.get("company") == "CliftonLarsonAllen LLP"), {})
         if not job:
             return jsonify({"fulfillmentText": "No CliftonLarsonAllen details found."})
         return jsonify({"fulfillmentText": format_experience(job)})
 
     # CPI SECURITY
-    if intent in ["CPI Security", "CPI Security Details", "Inventory Internship"]:
+    if intent == "CPI Security":
         job = next((x for x in data.get("experience", []) if x.get("company") == "CPI Security"), {})
         if not job:
             return jsonify({"fulfillmentText": "No CPI Security details found."})

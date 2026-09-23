@@ -1,0 +1,54 @@
+[
+  {
+    "id": "d5ad1971-d924-4710-918b-3a6e33b3dc5f",
+    "data": [
+      {
+        "text": "Can you tell me about platforms on Ryan\u0027s resume?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "d9bf510b-5134-400f-8cb1-ca49f1d51b15",
+    "data": [
+      {
+        "text": "Platform experience?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "d2b0972d-234b-44da-bef3-43c5df4f5ce9",
+    "data": [
+      {
+        "text": "Platforms?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "474054e8-53ad-446d-998a-97b9ef1b21a4",
+    "data": [
+      {
+        "text": "What platforms has Ryan worked with?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]
