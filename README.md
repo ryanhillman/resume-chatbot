@@ -40,12 +40,23 @@ pip install -r requirements.txt
 python main.py
 ```
 
-The Flask webhook will run locally at `http://localhost:8080`.
+Deploy to Cloud Run to get a public webhook URL.
+
+### Dialogflow
+
+1. Zip the contents of `chatbot/` and import it via **Settings → Export and Import → Restore From Zip**.
+2. Under **Fulfillment**, enable the webhook and set the URL to `https://<your-cloud-run-url>/webhook`.
+
+### Resumes
+
+Upload the PDF and JSON resume files to a Google Cloud storage bucket. 
 
 ### Frontend
 
-The frontend is a standalone `index.html` page. It can be opened locally or hosted through GitHub Pages.
+Enable **Integrations → Dialogflow Messenger** and paste your `agent-id` into `index.html`. 
+
+Open locally or host with GitHub Pages.
 
 ---
 
-Please see the linked demo for an overview of deployment.
+See the [demo](https://youtu.be/-dResrRCJoQ) for a full walkthrough.
