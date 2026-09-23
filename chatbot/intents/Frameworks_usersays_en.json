@@ -1,0 +1,41 @@
+[
+  {
+    "id": "758e97a3-2e31-4216-8cc8-4d49d15e4ee5",
+    "data": [
+      {
+        "text": "Can you tell me what frameworks are on Ryan\u0027s resume?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "4216c8e3-a1ab-4d95-ada8-ecaceb7e52fc",
+    "data": [
+      {
+        "text": "What framework experience does Ryan have?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "58d5a6d5-9fa2-4886-b3c3-292a8ea0ee6b",
+    "data": [
+      {
+        "text": "Frameworks?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

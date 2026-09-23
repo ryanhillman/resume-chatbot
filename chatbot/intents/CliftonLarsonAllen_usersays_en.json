@@ -1,0 +1,54 @@
+[
+  {
+    "id": "de59ca58-992f-49a8-8f74-d9e291217e7c",
+    "data": [
+      {
+        "text": "Can you tell me about Ryan\u0027s experience with CLA?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "0bfd62a3-9304-4da5-8793-066b6030e775",
+    "data": [
+      {
+        "text": "Tax Accounting Internship?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "b7cbdb0e-6811-423a-8b39-ba61c082c05f",
+    "data": [
+      {
+        "text": "CliftonLarsonAllen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "e326cf33-d096-41e0-a6a3-18c92f5a9fd2",
+    "data": [
+      {
+        "text": "CLA?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "5fa9f44c-cc9f-436b-8252-82d745fdc9c1",
+    "data": [
+      {
+        "text": "NYCERS?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "6e17ddfe-0c51-47b8-b790-56914621fbc0",
+    "data": [
+      {
+        "text": "New York",
+        "meta": "@sys.geo-city",
+        "alias": "geo-city",
+        "userDefined": false
+      },
+      {
+        "text": " City Employees\u0027 Retirement System?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "6dbfd7b5-d268-4d8b-98c8-57716d64139e",
+    "data": [
+      {
+        "text": "Cloud Application Developer?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

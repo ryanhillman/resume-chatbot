@@ -1,0 +1,80 @@
+[
+  {
+    "id": "8bcf1669-99de-434c-aec0-e9c704580e83",
+    "data": [
+      {
+        "text": "Can you tell me Ryan\u0027s certifications?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "4ed14364-35d4-47a0-8abb-5866f2366039",
+    "data": [
+      {
+        "text": "Certifications on resume?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "129f040b-c9de-4d16-b493-93eabd2bbfa0",
+    "data": [
+      {
+        "text": "Credentials?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "d01cc71f-f968-4b90-8edc-26092fca3ede",
+    "data": [
+      {
+        "text": "What exams has Ryan passed?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "c0f0d450-2b95-413e-814d-06012afb73d6",
+    "data": [
+      {
+        "text": "Certifications?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "fb5c5791-0769-43b6-8f2c-9ab4ba892457",
+    "data": [
+      {
+        "text": "What is Ryan certified in?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

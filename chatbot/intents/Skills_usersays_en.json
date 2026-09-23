@@ -1,0 +1,54 @@
+[
+  {
+    "id": "e996f89f-62d2-4444-a073-956a8af28dd6",
+    "data": [
+      {
+        "text": "Can you tell me about Ryan\u0027s skills?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "a4c562a1-2dc2-4bb9-82d3-da3eacc280ce",
+    "data": [
+      {
+        "text": "Skills on resume?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "5d78c2d7-ecf7-4799-b874-d094b750506a",
+    "data": [
+      {
+        "text": "Skills?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "8e90f526-1089-4798-a14c-e0248323626b",
+    "data": [
+      {
+        "text": "What skills does Ryan have?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]
