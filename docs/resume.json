@@ -59,11 +59,11 @@
     "Google Cloud Digital Leader - December 2025"
   ],
   "skills": {
-  "Languages": ["Java", "Python", "JavaScript", "SQL", "R"],
-  "Frameworks & Libraries": ["Spring Boot", "Angular", "React", "FastAPI", "Flask", "Vue", "Pandas", "JUnit"],
-  "Platforms": ["AWS", "Microsoft Azure", "Google Cloud", "Pegasystems", "LangFlow"],
-  "DevOps": ["CI/CD", "Terraform", "Docker", "Kubernetes", "Kustomize", "Caddy"],
-  "Databases": ["PostgreSQL", "Airtable", "Redis"]
+    "Languages": ["Java", "Python", "JavaScript", "SQL", "R"],
+    "Frameworks & Libraries": ["Spring Boot", "Angular", "React", "FastAPI", "Flask", "Vue", "Pandas", "JUnit"],
+    "Platforms": ["AWS", "Microsoft Azure", "Google Cloud", "Pegasystems", "LangFlow"],
+    "DevOps": ["CI/CD", "Terraform", "Docker", "Kubernetes", "Kustomize", "Caddy"],
+    "Databases": ["PostgreSQL", "Airtable", "Redis"]
   },
   "awards": [
     "Presidential Service Award - completed over 100 hours of community service within 1 year"
