@@ -114,32 +114,32 @@ def webhook():
 
     # SKILLS sub-intents
     if intent == "Languages":
-        items = data.get("skills", {}).get("Languages", [])
+        items = data.get("skills", {}).get("languages", [])
         if not items:
             return jsonify({"fulfillmentText": "No languages found."})
         return jsonify({"fulfillmentText": "Ryan is skilled in\n\n" + "\n".join(f"- {x}" for x in items)})
 
     if intent == "Frameworks":
-        items = data.get("skills", {}).get("Frameworks & Libraries", [])
+        items = data.get("skills", {}).get("frameworks", [])
         if not items:
             return jsonify({"fulfillmentText": "No frameworks or libraries found."})
         return jsonify({"fulfillmentText": "Ryan has experience with\n\n" + "\n".join(f"- {x}" for x in items)})
 
     if intent == "Platforms":
-        items = data.get("skills", {}).get("Platforms", [])
+        items = data.get("skills", {}).get("platforms", [])
         if not items:
             return jsonify({"fulfillmentText": "No platforms found."})
         return jsonify({"fulfillmentText": "Ryan has worked with\n\n" + "\n".join(f"- {x}" for x in items)})
 
     if intent == "Databases":
-        items = data.get("skills", {}).get("Databases", [])
+        items = data.get("skills", {}).get("databases", [])
         if not items:
             return jsonify({"fulfillmentText": "No databases found."})
         return jsonify({"fulfillmentText": "Ryan is familiar with\n\n" + "\n".join(f"- {x}" for x in items)})
 
     # DEVOPS
     if intent == "DevOps":
-        items = data.get("skills", {}).get("DevOps", [])
+        items = data.get("skills", {}).get("devops", [])
         if not items:
             return jsonify({"fulfillmentText": "No DevOps skills found."})
         return jsonify({"fulfillmentText": "Ryan has DevOps experience with\n\n" + "\n".join(f"- {x}" for x in items)})
