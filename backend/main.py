@@ -1,22 +1,35 @@
+import time
+
 from flask import Flask, request, jsonify
 import requests
 
 app = Flask(__name__)
 
 RESUME_URL = "https://storage.googleapis.com/ryan-resume-bucket/resume.json"
+CACHE_TTL_SECONDS = 300
+
+_cache = {"data": None, "fetched_at": 0.0}
 
 
 def load_resume():
+    now = time.time()
+    if _cache["data"] is not None and now - _cache["fetched_at"] < CACHE_TTL_SECONDS:
+        return _cache["data"]
+
     try:
         r = requests.get(RESUME_URL, timeout=5)
         r.raise_for_status()
-        return r.json()
+        data = r.json()
     except requests.RequestException as e:
         app.logger.error(f"Failed to fetch resume data: {e}")
-        return {}
+        return _cache["data"] or {}
     except ValueError as e:
         app.logger.error(f"Invalid resume JSON: {e}")
-        return {}
+        return _cache["data"] or {}
+
+    _cache["data"] = data
+    _cache["fetched_at"] = now
+    return data
 
 
 def format_experience(job):
