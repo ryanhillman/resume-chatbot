@@ -57,6 +57,14 @@ Enable **Integrations → Dialogflow Messenger** and paste your `agent-id` into 
 
 Open locally or host with GitHub Pages.
 
+### Tests
+
+```bash
+cd backend
+pip install -r requirements-dev.txt
+pytest
+```
+
 ---
 
 See the [demo](https://youtu.be/-dResrRCJoQ) for a full walkthrough.
