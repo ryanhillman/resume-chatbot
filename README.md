@@ -34,7 +34,7 @@ This project allows visitors to explore my professional background with a chatbo
 
 ### Resumes
 
-Upload the PDF and JSON resume files to a Google Cloud storage bucket. 
+Upload `docs/resume.json` and `docs/resume.pdf` to a public Cloud Storage bucket, then update `RESUME_URL` in `backend/main.py` and the Resume link in `index.html`.
 
 ### Backend
 
@@ -44,16 +44,22 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Deploy to Cloud Run to get a public webhook URL.
+Deploy to Cloud Run from the repo root (Dialogflow needs a public URL):
+
+```bash
+gcloud run deploy resume-webhook --source backend --allow-unauthenticated
+```
 
 ### Dialogflow
 
-1. Zip the contents of `chatbot/` and import it via **Settings → Export and Import → Restore From Zip**.
+1. Create a Dialogflow ES agent, zip the contents of `chatbot/`, and import it via **Settings → Export and Import → Restore From Zip**.
 2. Under **Fulfillment**, enable the webhook and set the URL to `https://<your-cloud-run-url>/webhook`.
 
 ### Frontend
 
-Enable **Integrations → Dialogflow Messenger** and paste your `agent-id` into `index.html`. 
+Enable **Integrations → Dialogflow Messenger** and paste your `agent-id` into `index.html`.
+
+Replace the Formspree form ID in `index.html` with your own from [Formspree](https://formspree.io).
 
 Open locally or host with GitHub Pages.
 
@@ -63,6 +69,52 @@ Open locally or host with GitHub Pages.
 cd backend
 pip install -r requirements-dev.txt
 pytest
+```
+
+---
+
+## Webhook API
+
+The backend exposes one endpoint, called by Dialogflow ES fulfillment.
+
+### `POST /webhook`
+
+**Request:** a standard [Dialogflow ES webhook request](https://cloud.google.com/dialogflow/es/docs/fulfillment-webhook#webhook_request). Only `queryResult.intent.displayName` is used.
+
+```json
+{
+  "queryResult": {
+    "intent": { "displayName": "Languages" }
+  }
+}
+```
+
+**Response:** always `200 OK` with a single text reply.
+
+```json
+{
+  "fulfillmentText": "Ryan is skilled in\n\n- Java\n- Python\n- JavaScript\n- SQL\n- R"
+}
+```
+
+**Supported intents**
+
+| Category | Intents |
+|---|---|
+| Experience | `Experience`, `Accenture`, `NYCERS`, `Bank of America`, `Freshpire`, `CliftonLarsonAllen`, `CPI Security` |
+| Skills | `Skills`, `Languages`, `Frameworks`, `Platforms`, `Databases`, `DevOps` |
+| Other | `Education`, `Certifications`, `Awards` |
+
+Any other intent name, or a missing/malformed body, returns a general help message.
+
+**Data source:** resume data is read from `resume.json` in Cloud Storage (see `docs/resume.json` for the expected format) and cached for 5 minutes. If the file can't be fetched, the last cached copy is used. With no cached copy, intents reply that no data was found.
+
+### Try it locally
+
+```bash
+curl -X POST http://localhost:8080/webhook \
+  -H "Content-Type: application/json" \
+  -d '{"queryResult": {"intent": {"displayName": "Languages"}}}'
 ```
 
 ---
