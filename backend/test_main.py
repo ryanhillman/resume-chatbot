@@ -1,4 +1,43 @@
+import json
+from pathlib import Path
+
+import pytest
+
 import main
+
+RESUME = json.loads((Path(__file__).parent.parent / "docs" / "resume.json").read_text(encoding="utf-8"))
+JOBS = {job["company"]: job for job in RESUME["experience"]}
+ACCENTURE = JOBS["Accenture"]["details"]
+
+
+def role_bullet(name):
+    return next(bullets for title, bullets in ACCENTURE.items() if name in title)[0]
+
+
+@pytest.mark.parametrize(
+    "intent, expected",
+    [
+        ("Experience", JOBS["Accenture"]["role"]),
+        ("NYCERS", role_bullet("NYCERS")),
+        ("Bank of America", role_bullet("Bank of America")),
+        ("Freshpire", JOBS["Freshpire Inc"]["details"][0]),
+        ("CliftonLarsonAllen", JOBS["CliftonLarsonAllen LLP"]["details"][0]),
+        ("CPI Security", JOBS["CPI Security"]["details"][0]),
+        ("Languages", RESUME["skills"]["languages"][0]),
+        ("Frameworks", RESUME["skills"]["frameworks"][0]),
+        ("Platforms", RESUME["skills"]["platforms"][0]),
+        ("Databases", RESUME["skills"]["databases"][0]),
+        ("DevOps", RESUME["skills"]["devops"][0]),
+        ("Education", RESUME["education"]["school"]),
+        ("Certifications", RESUME["certifications"][0]),
+        ("Awards", RESUME["awards"][0]),
+    ],
+)
+def test_real_resume_data_reaches_reply(monkeypatch, intent, expected):
+    monkeypatch.setattr(main, "load_resume", lambda: RESUME)
+    client = main.app.test_client()
+    resp = client.post("/webhook", json={"queryResult": {"intent": {"displayName": intent}}})
+    assert expected in resp.get_json()["fulfillmentText"]
 
 
 def test_languages_intent_lists_items(monkeypatch):
