@@ -75,41 +75,7 @@ pytest
 
 ## Webhook API
 
-The backend exposes one endpoint, called by Dialogflow ES fulfillment.
-
-### `POST /webhook`
-
-**Request:** a standard [Dialogflow ES webhook request](https://cloud.google.com/dialogflow/es/docs/fulfillment-webhook#webhook_request). Only `queryResult.intent.displayName` is used.
-
-```json
-{
-  "queryResult": {
-    "intent": { "displayName": "Languages" }
-  }
-}
-```
-
-**Response:** always `200 OK` with a single text reply.
-
-```json
-{
-  "fulfillmentText": "Ryan is skilled in\n\n- Java\n- Python\n- JavaScript\n- SQL\n- R"
-}
-```
-
-**Supported intents**
-
-| Category | Intents |
-|---|---|
-| Experience | `Experience`, `Accenture`, `NYCERS`, `Bank of America`, `Freshpire`, `CliftonLarsonAllen`, `CPI Security` |
-| Skills | `Skills`, `Languages`, `Frameworks`, `Platforms`, `Databases`, `DevOps` |
-| Other | `Education`, `Certifications`, `Awards` |
-
-Any other intent name, or a missing/malformed body, returns a general help message.
-
-**Data source:** resume data is read from `resume.json` in Cloud Storage (see `docs/resume.json` for the expected format) and cached for 5 minutes. If the file can't be fetched, the last cached copy is used. With no cached copy, intents reply that no data was found.
-
-### Try it locally
+`POST /webhook` receives a [Dialogflow ES webhook request](https://cloud.google.com/dialogflow/es/docs/fulfillment-webhook#webhook_request) and replies with `{"fulfillmentText": "..."}`, chosen by the matched intent's display name. Intents are defined in `chatbot/intents/` and handled in `backend/main.py`.
 
 ```bash
 curl -X POST http://localhost:8080/webhook \
