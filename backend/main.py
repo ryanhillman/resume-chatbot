@@ -71,7 +71,7 @@ def webhook():
                 "Ryan held two roles while at Accenture\n\n"
                 "- Cloud Application Developer with NYCERS (New York City Employees Retirement System)\n"
                 "- Pegasystems Support with Bank of America (BoA)\n\n"
-                "- Would you like to hear more about either?"
+                "Ask about NYCERS or Bank of America to hear more."
         })
 
     # NYCERS
