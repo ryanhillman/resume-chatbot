@@ -16,13 +16,7 @@
     "id": "6e17ddfe-0c51-47b8-b790-56914621fbc0",
     "data": [
       {
-        "text": "New York",
-        "meta": "@sys.geo-city",
-        "alias": "geo-city",
-        "userDefined": false
-      },
-      {
-        "text": " City Employees\u0027 Retirement System?",
+        "text": "New York City Employees\u0027 Retirement System?",
         "userDefined": false
       }
     ],
