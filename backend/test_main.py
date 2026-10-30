@@ -40,13 +40,21 @@ def test_real_resume_data_reaches_reply(monkeypatch, intent, expected):
     assert expected in resp.get_json()["fulfillmentText"]
 
 
-def test_languages_intent_lists_items(monkeypatch):
-    monkeypatch.setattr(main, "load_resume", lambda: {"skills": {"languages": ["Python", "Go"]}})
-    client = main.app.test_client()
-    resp = client.post("/webhook", json={"queryResult": {"intent": {"displayName": "Languages"}}})
-    text = resp.get_json()["fulfillmentText"]
-    assert "Python" in text
-    assert "Go" in text
+def test_webhook_intents_match_handlers():
+    d = Path(__file__).parent.parent / "chatbot" / "intents"
+    intents = [json.loads(p.read_text(encoding="utf-8")) for p in d.glob("*.json") if not p.stem.endswith("_usersays_en")]
+    assert {i["name"] for i in intents if i.get("webhookUsed")} == set(main.HANDLERS)
+
+
+def test_failed_fetch_serves_stale_cache(monkeypatch):
+    stale = {"skills": {"languages": ["Python"]}}
+    monkeypatch.setattr(main, "_cache", {"data": stale, "fetched_at": 0.0})
+
+    def fail(*args, **kwargs):
+        raise main.requests.ConnectionError("unreachable")
+
+    monkeypatch.setattr(main.requests, "get", fail)
+    assert main.load_resume() is stale
 
 
 def test_accenture_intent_returns_fixed_text(monkeypatch):
