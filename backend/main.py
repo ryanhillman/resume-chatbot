@@ -1,3 +1,4 @@
+import os
 import time
 
 from flask import Flask, request, jsonify
@@ -5,8 +6,14 @@ import requests
 
 app = Flask(__name__)
 
-RESUME_URL = "https://storage.googleapis.com/ryan-resume-bucket/resume.json"
+RESUME_URL = os.environ.get(
+    "RESUME_URL", "https://storage.googleapis.com/ryan-resume-bucket/resume.json"
+)
 CACHE_TTL_SECONDS = 300
+
+FALLBACK_TEXT = (
+    "I can help with Ryan's experience, skills, education, certifications, and awards. Please ask about one!"
+)
 
 _cache = {"data": None, "fetched_at": 0.0}
 
@@ -32,163 +39,122 @@ def load_resume():
     return data
 
 
+def bullet_list(items):
+    return "\n".join(f"- {item}" for item in items)
+
+
+def find_job(data, company):
+    return next((x for x in data.get("experience", []) if x.get("company") == company), {})
+
+
 def format_experience(job):
-    role = job.get("role", "")
-    company = job.get("company", "")
+    text = f"{job.get('role', '')} for {job.get('company', '')}"
     details = job.get("details", [])
-
-    text = f"{role} for {company}"
-
     if isinstance(details, list) and details:
-        text += "\n\n" + "\n".join(f"- {b}" for b in details)
-
+        text += "\n\n" + bullet_list(details)
     return text
+
+
+def experience(data):
+    jobs = data.get("experience", [])
+    if not jobs:
+        return "No experience data found."
+    lines = ["Here is Ryan's professional experience", ""]
+    for job in jobs:
+        role = job.get("role", "")
+        company = job.get("company", "")
+        if role and company:
+            lines.append(f"- {role} at {company}")
+    return "\n".join(lines)
+
+
+def education(data):
+    edu = data.get("education", {})
+    return (
+        f"Ryan earned his degree at {edu.get('school', '')}. It was a {edu.get('degree', '')}. "
+        f"He graduated in {edu.get('graduation', '')}."
+    )
+
+
+def fixed_reply(text):
+    return lambda data: text
+
+
+def accenture_role(details_key, title, label):
+    def handler(data):
+        bullets = find_job(data, "Accenture").get("details", {}).get(details_key, [])
+        if not bullets:
+            return f"No {label} details found."
+        return f"{title}\n\n{bullet_list(bullets)}"
+    return handler
+
+
+def job_reply(company, label):
+    def handler(data):
+        job = find_job(data, company)
+        if not job:
+            return f"No {label} details found."
+        return format_experience(job)
+    return handler
+
+
+def list_reply(intro, missing, *path):
+    def handler(data):
+        items = data
+        for key in path:
+            items = items.get(key, {})
+        if not items:
+            return missing
+        return f"{intro}\n\n{bullet_list(items)}"
+    return handler
+
+
+HANDLERS = {
+    "Experience": experience,
+    "Accenture": fixed_reply(
+        "Ryan held two roles while at Accenture\n\n"
+        "- Cloud Application Developer with NYCERS (New York City Employees Retirement System)\n"
+        "- Pegasystems Support with Bank of America (BoA)\n\n"
+        "Ask about NYCERS or Bank of America to hear more."
+    ),
+    "NYCERS": accenture_role(
+        "Cloud Application Developer - New York City Employees Retirement System (NYCERS)",
+        "Cloud Application Developer for NYCERS",
+        "NYCERS",
+    ),
+    "Bank of America": accenture_role(
+        "Pegasystems Support - Bank of America",
+        "Pegasystems Support for Bank of America",
+        "Bank of America",
+    ),
+    "Freshpire": job_reply("Freshpire Inc", "Freshpire"),
+    "CliftonLarsonAllen": job_reply("CliftonLarsonAllen LLP", "CliftonLarsonAllen"),
+    "CPI Security": job_reply("CPI Security", "CPI Security"),
+    "Skills": fixed_reply(
+        "Ryan has experience with Programming Languages, Frameworks/Libraries, Platforms, Databases, and DevOps. "
+        "Which would you like to know more about?"
+    ),
+    "Languages": list_reply("Ryan is skilled in", "No languages found.", "skills", "languages"),
+    "Frameworks": list_reply("Ryan has experience with", "No frameworks or libraries found.", "skills", "frameworks"),
+    "Platforms": list_reply("Ryan has worked with", "No platforms found.", "skills", "platforms"),
+    "Databases": list_reply("Ryan is familiar with", "No databases found.", "skills", "databases"),
+    "DevOps": list_reply("Ryan has DevOps experience with", "No DevOps skills found.", "skills", "devops"),
+    "Education": education,
+    "Certifications": list_reply(
+        "Ryan holds the following certifications", "No certifications found.", "certifications"
+    ),
+    "Awards": list_reply("Ryan has received the following awards", "No awards found.", "awards"),
+}
 
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
     req = request.get_json(silent=True) or {}
     intent = (req.get("queryResult", {}).get("intent", {}) or {}).get("displayName", "")
-    data = load_resume()
-
-    # EXPERIENCE
-    if intent == "Experience":
-        exps = data.get("experience", [])
-        if not exps:
-            return jsonify({"fulfillmentText": "No experience data found."})
-        lines = ["Here is Ryan's professional experience", ""]
-        for job in exps:
-            role = job.get("role", "")
-            company = job.get("company", "")
-            if role and company:
-                lines.append(f"- {role} at {company}")
-        return jsonify({"fulfillmentText": "\n".join(lines)})
-
-    # ACCENTURE
-    if intent == "Accenture":
-        return jsonify({
-            "fulfillmentText":
-                "Ryan held two roles while at Accenture\n\n"
-                "- Cloud Application Developer with NYCERS (New York City Employees Retirement System)\n"
-                "- Pegasystems Support with Bank of America (BoA)\n\n"
-                "Ask about NYCERS or Bank of America to hear more."
-        })
-
-    # NYCERS
-    if intent == "NYCERS":
-        accenture = next((x for x in data.get("experience", []) if x.get("company") == "Accenture"), {})
-        bullets = accenture.get("details", {}).get(
-            "Cloud Application Developer - New York City Employees Retirement System (NYCERS)", []
-        )
-        if not bullets:
-            return jsonify({"fulfillmentText": "No NYCERS details found."})
-        text = "Cloud Application Developer for NYCERS\n\n" + "\n".join(f"- {b}" for b in bullets)
-        return jsonify({"fulfillmentText": text})
-
-    # BANK OF AMERICA
-    if intent == "Bank of America":
-        accenture = next((x for x in data.get("experience", []) if x.get("company") == "Accenture"), {})
-        bullets = accenture.get("details", {}).get(
-            "Pegasystems Support - Bank of America", []
-        )
-        if not bullets:
-            return jsonify({"fulfillmentText": "No Bank of America details found."})
-        text = "Pegasystems Support for Bank of America\n\n" + "\n".join(f"- {b}" for b in bullets)
-        return jsonify({"fulfillmentText": text})
-
-    # FRESHPIRE
-    if intent == "Freshpire":
-        job = next((x for x in data.get("experience", []) if x.get("company") == "Freshpire Inc"), {})
-        if not job:
-            return jsonify({"fulfillmentText": "No Freshpire details found."})
-        return jsonify({"fulfillmentText": format_experience(job)})
-
-    # CLIFTON LARSON ALLEN
-    if intent == "CliftonLarsonAllen":
-        job = next((x for x in data.get("experience", []) if x.get("company") == "CliftonLarsonAllen LLP"), {})
-        if not job:
-            return jsonify({"fulfillmentText": "No CliftonLarsonAllen details found."})
-        return jsonify({"fulfillmentText": format_experience(job)})
-
-    # CPI SECURITY
-    if intent == "CPI Security":
-        job = next((x for x in data.get("experience", []) if x.get("company") == "CPI Security"), {})
-        if not job:
-            return jsonify({"fulfillmentText": "No CPI Security details found."})
-        return jsonify({"fulfillmentText": format_experience(job)})
-
-    # SKILLS
-    if intent == "Skills":
-        return jsonify({
-            "fulfillmentText":
-                "Ryan has experience with Programming Languages, Frameworks/Libraries, Platforms, Databases, and DevOps. "
-                "Which would you like to know more about?"
-        })
-
-    # SKILLS sub-intents
-    if intent == "Languages":
-        items = data.get("skills", {}).get("languages", [])
-        if not items:
-            return jsonify({"fulfillmentText": "No languages found."})
-        return jsonify({"fulfillmentText": "Ryan is skilled in\n\n" + "\n".join(f"- {x}" for x in items)})
-
-    if intent == "Frameworks":
-        items = data.get("skills", {}).get("frameworks", [])
-        if not items:
-            return jsonify({"fulfillmentText": "No frameworks or libraries found."})
-        return jsonify({"fulfillmentText": "Ryan has experience with\n\n" + "\n".join(f"- {x}" for x in items)})
-
-    if intent == "Platforms":
-        items = data.get("skills", {}).get("platforms", [])
-        if not items:
-            return jsonify({"fulfillmentText": "No platforms found."})
-        return jsonify({"fulfillmentText": "Ryan has worked with\n\n" + "\n".join(f"- {x}" for x in items)})
-
-    if intent == "Databases":
-        items = data.get("skills", {}).get("databases", [])
-        if not items:
-            return jsonify({"fulfillmentText": "No databases found."})
-        return jsonify({"fulfillmentText": "Ryan is familiar with\n\n" + "\n".join(f"- {x}" for x in items)})
-
-    # DEVOPS
-    if intent == "DevOps":
-        items = data.get("skills", {}).get("devops", [])
-        if not items:
-            return jsonify({"fulfillmentText": "No DevOps skills found."})
-        return jsonify({"fulfillmentText": "Ryan has DevOps experience with\n\n" + "\n".join(f"- {x}" for x in items)})
-
-    # EDUCATION
-    if intent == "Education":
-        edu = data.get("education", {})
-        school = edu.get("school", "")
-        degree = edu.get("degree", "")
-        grad = edu.get("graduation", "")
-        text = f"Ryan earned his degree at {school}. It was a {degree}. He graduated in {grad}."
-        return jsonify({"fulfillmentText": text})
-
-    # CERTIFICATIONS
-    if intent == "Certifications":
-        certs = data.get("certifications", [])
-        if not certs:
-            return jsonify({"fulfillmentText": "No certifications found."})
-        return jsonify({"fulfillmentText": "Ryan holds the following certifications\n\n" + "\n".join(f"- {c}" for c in certs)})
-
-    # AWARDS
-    if intent == "Awards":
-        awards = data.get("awards", [])
-        if isinstance(awards, list):
-            return jsonify({
-                "fulfillmentText":
-                    "Ryan has received the following awards\n\n" + "\n".join(f"- {a}" for a in awards)
-                    if awards else "No awards found."
-            })
-
-    # FALLBACK
-    return jsonify({
-        "fulfillmentText":
-            "I can help with Ryan's experience, skills, education, certifications, and awards. Please ask about one!"
-    })
+    handler = HANDLERS.get(intent)
+    text = handler(load_resume()) if handler else FALLBACK_TEXT
+    return jsonify({"fulfillmentText": text})
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

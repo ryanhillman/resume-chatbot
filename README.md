@@ -34,7 +34,7 @@ This project allows visitors to explore my professional background with a chatbo
 
 ### Resumes
 
-Upload `docs/resume.json` and `docs/resume.pdf` to a public Cloud Storage bucket, then update `RESUME_URL` in `backend/main.py` and the Resume link in `index.html`.
+Upload `docs/resume.json` and `docs/resume.pdf` to a public Cloud Storage bucket, then update the Resume link in `index.html`.
 
 ### Backend
 
@@ -47,7 +47,8 @@ python main.py
 Deploy to Cloud Run from the repo root (Dialogflow needs a public URL):
 
 ```bash
-gcloud run deploy resume-webhook --source backend --allow-unauthenticated
+gcloud run deploy resume-webhook --source backend --allow-unauthenticated \
+  --set-env-vars RESUME_URL=https://storage.googleapis.com/<your-bucket>/resume.json
 ```
 
 ### Dialogflow
