@@ -182,7 +182,7 @@
   {
     "action": "smalltalk.agent.talk_to_me",
     "customAnswers": [
-      "Blah blah blah."
+      "That is my job as a chatbot."
     ]
   },
   {
@@ -236,7 +236,7 @@
   {
     "action": "smalltalk.emotions.wow",
     "customAnswers": [
-      "What a suprise."
+      "What a surprise."
     ]
   },
   {
@@ -470,7 +470,7 @@
   {
     "action": "smalltalk.confirmation.no",
     "customAnswers": [
-      "I agree."
+      "I disagree."
     ]
   },
   {
