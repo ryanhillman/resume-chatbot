@@ -16,9 +16,7 @@
     "welcomeIntentSignInRequired": false,
     "startIntents": [],
     "systemIntents": [],
-    "endIntentIds": [
-      "6de7aa96-89ff-4717-8071-cc015bc68330"
-    ],
+    "endIntentIds": [],
     "voiceType": "VOICE_TYPE_UNSPECIFIED",
     "capabilities": [],
     "env": "",
@@ -38,5 +36,5 @@
   "knowledgeServiceConfidenceAdjustment": 0.0,
   "dialogBuilderMode": false,
   "baseActionPackagesUrl": "",
-  "enableSpellCorrection": false
+  "enableSpellCorrection": true
 }
