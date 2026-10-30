@@ -26,7 +26,7 @@ This project allows visitors to explore my professional background with a chatbo
 - Links to a PDF version of my resume, LinkedIn, and GitHub.
 - Contact Form implemented with [Formspree](https://formspree.io).
 - GitHub Pages for static site hosting.
-- Frontend designed with HTML5, CSS3, and lightweight JavaScript.
+- Frontend built with HTML5 and CSS3.
 
 ---
 
