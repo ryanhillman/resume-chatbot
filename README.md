@@ -7,17 +7,11 @@
 
 This project allows visitors to explore my professional background with a chatbot.
 
----
-
 ## [Demo](https://youtu.be/-dResrRCJoQ)
-
----
 
 ## Screenshot
 
 ![Chatbot Screenshot](./docs/screenshot.png)
-
----
 
 ## Features
 - Google Dialogflow ES: Handles intents like skills, programming languages, and small talk.
@@ -27,8 +21,6 @@ This project allows visitors to explore my professional background with a chatbo
 - Contact Form implemented with [Formspree](https://formspree.io).
 - GitHub Pages for static site hosting.
 - Frontend built with HTML5 and CSS3.
-
----
 
 ## How to Run
 
@@ -72,8 +64,6 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
----
-
 ## Webhook API
 
 `POST /webhook` receives a [Dialogflow ES webhook request](https://cloud.google.com/dialogflow/es/docs/fulfillment-webhook#webhook_request) and replies with `{"fulfillmentText": "..."}`, chosen by the matched intent's display name. Intents are defined in `chatbot/intents/` and handled in `backend/main.py`.
@@ -83,7 +73,5 @@ curl -X POST http://localhost:8080/webhook \
   -H "Content-Type: application/json" \
   -d '{"queryResult": {"intent": {"displayName": "Languages"}}}'
 ```
-
----
 
 See the [demo](https://youtu.be/-dResrRCJoQ) for a full walkthrough.
